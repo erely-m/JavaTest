@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kafka.examples;
+package com.erely.kafka.demo;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -46,7 +46,7 @@ public class Producer extends Thread {
     public void run() {
         int messageNo = 1;
         while (true) {
-            String messageStr = "Message_" + messageNo;
+            String messageStr = "·¢ËÍÏûÏ¢" + messageNo;
             long startTime = System.currentTimeMillis();
             if (isAsync) { // Send asynchronously
                 producer.send(new ProducerRecord<>(topic,
@@ -57,12 +57,17 @@ public class Producer extends Thread {
                     producer.send(new ProducerRecord<>(topic,
                         messageNo,
                         messageStr)).get();
-                    System.out.println("Sent message: (" + messageNo + ", " + messageStr + ")");
+                    System.out.println("Sent message: (" + this.topic+" " + messageNo + ", " + messageStr + ")");
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
             }
             ++messageNo;
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ public class NioServer {
 		serverChannel.bind(new InetSocketAddress(8888));  //通道绑定监听端口
 		serverChannel.register(selector, SelectionKey.OP_ACCEPT); //注册监听事件至选择器上选择器
 		while(true) {
-			selector.select(); //阻塞等待事件 可设置询问事件
+			selector.select(); //阻塞等待事件 可设置询问事件 如果有事件epoll会回调
 			//有时间发生获取所有事件信息
 			Iterator<SelectionKey> keys = selector.selectedKeys().iterator(); //得到所有事件信息key 每个key对应一个渠道也就是监听每个渠道的事件
 			while(keys.hasNext()) {
@@ -37,7 +37,6 @@ public class NioServer {
 				
 			}
 		}
-		
 	}
 	
 	public void dispatch(SelectionKey key) throws Exception {
@@ -65,7 +64,7 @@ public class NioServer {
 	            SocketChannel socketChannel = channel.accept(); 
 	            socketChannel.configureBlocking(false);
 	            System.out.println("连接完成注册可读事件");
-	            socketChannel.register(this.selector, SelectionKey.OP_READ);
+	            socketChannel.register(this.selector, SelectionKey.OP_READ); //注册可读事件
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }

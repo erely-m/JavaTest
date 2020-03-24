@@ -50,6 +50,7 @@ public class NioClient {
 						buffer.flip();
 						socketChannel.write(buffer);
 						System.out.println("数据发送完成");
+						break;
 					} else {
 						// 链接失败，进程推出或直接抛出IOException
 						System.exit(1);
@@ -75,12 +76,16 @@ public class NioClient {
 				}
 
 			}
+			break;
 		}
 
 	}
 
 	public static void main(String[] args) throws Exception {
-		NioClient client = new NioClient();
-		client.init();
+		while(true){
+			NioClient client = new NioClient();
+			client.init();
+			Thread.sleep(100);
+		}
 	}
 }

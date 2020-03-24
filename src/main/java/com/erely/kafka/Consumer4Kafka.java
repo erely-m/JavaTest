@@ -15,7 +15,7 @@ public class Consumer4Kafka {
 
     public static void main(String[] args) {
         Properties p = new Properties();
-        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.225.128:9092");
+        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "182.92.87.55:9092");
         p.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.GROUP_ID_CONFIG, "test");

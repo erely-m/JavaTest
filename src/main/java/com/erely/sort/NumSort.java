@@ -96,17 +96,29 @@ public class NumSort {
      * @param s
      */
     public static void shellSort(int[] s) {
+        startTime();
+        int len = s.length;
+        for (int tag = len / 2; len > 0; len = len / 2) {
+            for (int i = tag; i < len; i++) {
+                int j = i;
+                int curr = s[i];
+//                for()
+            }
 
+        }
+        endTime("希尔");
+        print(s);
     }
 
     /**
      * 通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，
      * 则可分别对这两部分记录继续进行排序，以达到整个序列有序。
      * 快速排序使用分治法来把一个串（list）分为两个子串（sub-lists）。具体算法描述如下：
+     * <p>
+     * 从数列中挑出一个元素，称为 “基准”（pivot）；
+     * 重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；
+     * 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
      *
-     *  从数列中挑出一个元素，称为 “基准”（pivot）；
-     *   重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；
-     *   递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
      * @param s
      */
     public static void quickSort(int[] s) {
@@ -211,12 +223,13 @@ public class NumSort {
         int size = s.length;
         while (size > 1) {
             swap(s, 0, size - 1);
-            size --;
+            size--;
             heapify(s, 0, size); //重新构造
         }
         endTime("堆");
         print(s);
     }
+
     public static void heapInsert(int[] s) {
         for (int i = 0; i < s.length; i++) {
             int index = i;  //当前节点
@@ -228,6 +241,7 @@ public class NumSort {
             }
         }
     }
+
     //重新构造大顶堆
     public static void heapify(int[] s, int start, int size) {
         int left = 2 * start + 1; //左孩子下标
@@ -256,7 +270,7 @@ public class NumSort {
         s[end] = temp;
     }
 
-    public static void countSort(int[] s){
+    public static void countSort(int[] s) {
 
     }
 
@@ -275,5 +289,54 @@ public class NumSort {
         quickSort(s);
         mergeSort(s);
         heapSort(s);
+        minHeapSort(s); //小顶堆
+        shellSort(s);
+    }
+
+    private static void minHeapSort(int[] s) {
+        startTime();
+        minHeapInsert(s);
+        int size = s.length;
+        while (size > 1) {
+            swap(s, 0, size - 1);
+            System.out.print(s[size - 1] + " ");
+            size--;
+            minHeapify(s, 0, size); //重新构造
+        }
+        System.out.println(s[0]);
+        endTime("小顶堆");
+//        print(s);
+    }
+
+    private static void minHeapify(int[] s, int start, int size) {
+        int left = 2 * start + 1; //左孩子下标
+        int right = 2 * start + 2; //右孩子下标
+        if (left < size) { //如果左孩子不在范围内 这说明右孩子肯定不在范围内
+            int minIndex;//两个孩子中较大的索引值
+            if (s[left] > s[right] && right < size) {
+                minIndex = right;
+            } else {
+                minIndex = left;
+            }
+            if (s[start] < s[minIndex]) { //如果父节点大于孩子节点 满足直接退出
+
+            } else {//如果父节点不满足则进行交换
+                swap(s, start, minIndex);
+                start = minIndex;//重新计算该值索引再次比较孩子
+                heapify(s, start, size);
+            }
+        }
+    }
+
+    private static void minHeapInsert(int[] s) {
+        for (int i = 0; i < s.length; i++) {
+            int index = i;
+            int parent = (index - 1) / 2;//获取父节点
+            while (s[i] < s[parent]) { //当前节点小于父节点进行交换
+                swap(s, index, parent);
+                index = parent;//当前节点指向父节点
+                parent = (index - 1) / 2;//重新计算父节点
+            }
+        }
     }
 }
