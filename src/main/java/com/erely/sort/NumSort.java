@@ -1,5 +1,9 @@
 package com.erely.sort;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class NumSort {
 
     public static long startTime;
@@ -177,7 +181,7 @@ public class NumSort {
             mergeResolve(s, first, middle, temp);
             mergeResolve(s, middle + 1, last, temp);
             //合并
-            mergeArray(s, first, last, middle, temp);
+            mergeArray(s, first, middle, last, temp);
         }
     }
 

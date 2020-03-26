@@ -1,5 +1,8 @@
 package com.erely.tree;
 
+import java.util.LinkedList;
+import java.util.Stack;
+
 /**
  * 二叉树
  */
@@ -60,6 +63,7 @@ public class BinaryTree {
     public void insertValue(int value) throws Exception {
         createBinaryTree(value);
     }
+
     //插入节点
     private void insertNode(Node node) throws Exception {
         Node pre = null;
@@ -170,6 +174,40 @@ public class BinaryTree {
 
         tree.delete(39);
         System.out.println(tree.root.getValue());
+        System.out.println("++++++++++++");
+        firstSort(tree.root);
+        System.out.println();
+        sort(tree.root);
+    }
+
+
+    public static void firstSort(Node node) {//先序遍历
+
+
+        if (node.getLeftNode() != null) {
+            firstSort(node.getLeftNode());
+        }
+        if (node.getRightNode() != null) {
+            firstSort(node.getRightNode());
+        }
+        System.out.print(node.value + "  ");
+    }
+
+    public static void sort(Node node) {
+        Stack<Node> stack = new Stack<Node>();
+        Node temp = node;
+        while (temp != null || !stack.empty()) {
+            while (temp != null) {
+                stack.push(temp);
+                temp = temp.getLeftNode();
+            }
+
+            if (!stack.empty()) {
+                Node n = stack.pop();
+                System.out.print(n.value + " ");
+                temp = n.rightNode;
+            }
+        }
     }
 
 }
