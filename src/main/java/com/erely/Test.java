@@ -37,6 +37,14 @@ public class Test {
 //        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("");
 
 //        System.out.println(64 >> 6);
+//        String s = "<a><b></c>";
+//        System.out.println(s.indexOf("<b>"));
+//        File file = new File("E:\\GIT\\Erely\\DubboCode\\111.txt");
+//        System.out.println(file.getName());
+//
+//        String s1 = "/admin/redis/getAll";
+//        String s2 = "/admin/redis/getAll";
+//        System.out.println(s1.equals(s2));
     }
 
 }

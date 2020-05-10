@@ -26,17 +26,16 @@ public class isAnagram {
     }
 
     public boolean f1(String s, String t) {
-
-        return false;
-    }
-
-    public char[] f2(String s) {
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-
-
+        if (s.length() != t.length()) return false;
+        int[] hashTable = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            hashTable[s.charAt(i) - 'a']++;
+            hashTable[t.charAt(i) - 'a']--;
         }
-        return chars;
+        for (int i : hashTable) {
+             if(i != 0 )return  false;
+        }
+        return true;
     }
 
 

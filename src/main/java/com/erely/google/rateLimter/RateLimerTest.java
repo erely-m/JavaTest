@@ -12,6 +12,5 @@ public class RateLimerTest {
             System.out.println(i + "  " + rateLimiter.acquire(i));
         }
 
-
     }
 }

@@ -8,4 +8,10 @@ public class Person {
     public Person(){
         System.out.println( "this is person!");
     }
+
+    public void say(){
+
+        System.out.println("this is say method.");
+    }
+
 }
